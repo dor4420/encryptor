@@ -8,15 +8,15 @@ public class App {
         Logo.printLogo();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Encryptor");
-        int choice;
-        while(true) {
-            System.out.println("Please choose your mode\nEnter 1 for Encryption, 2 for Decryption");
-            choice = scanner.nextInt();
+        CRYPTO_CHOICE choice;
+        while (true) {
+            System.out.println("Please choose your mode\nEnter 0 for Encryption, 1 for Decryption");
+            choice = CRYPTO_CHOICE.values()[scanner.nextInt()];
 
-            if (choice == 1) {
+            if (choice == CRYPTO_CHOICE.ENCRYPT) {
                 System.out.println("Encryption!");
                 break;
-            } else if (choice == 2) {
+            } else if (choice == CRYPTO_CHOICE.DECRYPT) {
                 System.out.println("Decryption!");
                 break;
             } else {
@@ -37,7 +37,7 @@ public class App {
 
         String fileName = file.getName();
 
-        if (choice == 1) {
+        if (choice == CRYPTO_CHOICE.ENCRYPT) {
             System.out.println("Encrypting " + fileName);
         } else {
             System.out.println("Decrypting " + fileName);
