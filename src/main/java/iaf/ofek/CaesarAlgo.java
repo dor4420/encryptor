@@ -7,11 +7,15 @@ public class CaesarAlgo {
 
     private static final byte HIGHEST_KEY_ALLOWED = (byte) 127 - 31;
 
-    public static String encrypt(String message) {
+    public static String encrypt(String message, boolean isTest) {
         byte[] messageInBytes = message.getBytes();
         byte[] encryptedData = new byte[messageInBytes.length];
 
         byte key = (byte) new Random().nextInt(HIGHEST_KEY_ALLOWED);
+
+        if (isTest) {
+            key = (byte) 87;
+        }
 
         System.out.println("Key:" + key);
 
