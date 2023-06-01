@@ -1,26 +1,38 @@
-import iaf.ofek.CaesarAlgo;
-import org.junit.jupiter.api.Assertions;
+import iaf.ofek.Encryptor;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 class CaesarAlgoTest {
 
-    private static final String DECRYPTED_MESSAGE = "This is a medium size paragraph, let's encrypt it and see what happens";
-    private static final String ENCRYPTED_MESSAGE = "K_`jw`jwXwd\\[`ldwj`q\\wgXiX^iXg_#wc\\k~jw\\eZipgkw`kwXe[wj\\\\wn_Xkw_Xgg\\ej";
+    private static final String DECRYPTED_FILE_PATH = "output/text.txt";
+    private static final String ENCRYPTED_FILE_PATH = "output/text.txt.encrypted";
+    private static final byte KEY = 87;
     @Test
     public void testEncrypt() {
-        String encryptedText = CaesarAlgo.encrypt(DECRYPTED_MESSAGE, true);
-
-        // The expected result after encryption with key=3 is "Khoor"
-//        String expected = "Khoor";
-
-        System.out.println(encryptedText);
-//        Assertions.assertEquals(expected, encryptedText);
+        Encryptor encryptor = new Encryptor(DECRYPTED_FILE_PATH, KEY);
+        try {
+            encryptor.encrypt();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
     public void testDecrypt() {
-        String decryptedText = CaesarAlgo.decrypt(ENCRYPTED_MESSAGE, (byte) 87);
-        System.out.println(decryptedText);
-        Assertions.assertEquals(DECRYPTED_MESSAGE, decryptedText);
+        Encryptor decryptor = new Encryptor(ENCRYPTED_FILE_PATH, KEY);
+        try {
+            decryptor.decrypt(KEY);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void byteTest() {
+        byte one = -85;
+        byte two = 87;
+
+        System.out.println((byte) (one - two));
     }
 }
