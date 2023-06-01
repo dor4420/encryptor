@@ -1,5 +1,6 @@
 package iaf.ofek;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 public class Encryptor {
@@ -18,7 +19,7 @@ public class Encryptor {
     }
 
 
-    public void encrypt() {
+    public void encrypt() throws IOException {
         byte[] data = fileHelper.readFromFile();
         byte[] encryptedData;
 
@@ -30,7 +31,7 @@ public class Encryptor {
         encryptedFile.createFile(encryptedData);
     }
 
-    public void decrypt(byte key) {
+    public void decrypt(byte key) throws IOException {
         byte[] data = fileHelper.readFromFile();
         byte[] decryptedData = DataManipulator.decrypt(data, key);
 
@@ -40,7 +41,7 @@ public class Encryptor {
         String decryptedFilePath = decryptedFileDirPath + "/" + fileName;
 
         FileHelper decryptedFile = new FileHelper(decryptedFilePath);
-        
+
         decryptedFile.createFile(decryptedData);
     }
 }
